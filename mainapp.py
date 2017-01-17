@@ -18,10 +18,12 @@ class Menu(object):
         #self.app()
         self.view.present()
 
-    def set_lesson_file(self):
+    def set_lesson_file(self, sender):
         index = self.table_view.data_source.selected_row
         self.lesson_file = self.lesson_files[index]
-        self.pairs = bilinguis.FileBase(self.lesson_file, "files/").parse_content().pairs
+        f = bilinguis.FileBase(self.lesson_file, "files/")
+        f.parse_content()
+        self.pairs = f.pairs
 
     def switch_random(self, sender):
         if sender.value:
