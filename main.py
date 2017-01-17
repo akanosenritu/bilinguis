@@ -103,20 +103,37 @@ class WordFile(FileBase):
         FileBase.__init__(self, name, location)
 
 
+class Pairs(object):
+    def __init__(self, pairs):
+        self.pairs = pairs
+
+    def randomize(self):
+        result = []
+        for i in range(len(self.pairs)):
+            choice = random.choice(self.pairs)
+            result.append(choice)
+            self.pairs.remove(choice)
+        self.pairs = result
+
+    def reverse(self):
+        for pair in self.pairs:
+            pair.reverse()
+
+
 class Practice:
     def __init__(self):
         self.contents = []
 
     def practice(self, input, random, reverse, repeat):
-        contents2 = copy.deepcopy(self.contents)
+        practice_contents = Pairs(copy.deepcopy(self.contents))
         if random != 0:
-            contents2 = self.randomize(contents2)
+            practice_contents.randomize()
         if reverse != 0:
-            contents2 = self.reverse(contents2)
+            practice_contents.reverse()
         if input != 0:
-            self.input_practice(contents2, repeat)
+            self.input_practice(practice_contents.pairs, repeat)
         else:
-            self.show(contents2, repeat)
+            self.show(practice_contents.pairs, repeat)
 
     def show(self, contents, repeat=0):
         print "If you answer correctly, just press enter. Otherwise input something." if repeat\
@@ -147,21 +164,6 @@ class Practice:
         if repeat == 1 and remains != []:
             print "Another round..."
             self.input_practice(remains, repeat=1)
-
-    def randomize(self, contents):
-        base = contents
-        result = []
-        for i in range(len(base)):
-            choice = random.choice(base)
-            result.append(choice)
-            base.remove(choice)
-        return result
-
-    def reverse(self, contents):
-        result = []
-        for i in range(len(contents)):
-            result.append([contents[i][1], contents[i][0]])
-        return result
 
 
 if __name__ == '__main__':
