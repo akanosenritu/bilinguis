@@ -1,4 +1,5 @@
 import ui
+import dialogs
 import os
 import bilinguis
 
@@ -38,7 +39,10 @@ class Menu(object):
             self.options["reverse"] = False
 
     def button_go(self, sender):
-        Practice(bilinguis.Pairs(self.pairs), self.options)
+        if self.pairs:
+            Practice(bilinguis.Pairs(self.pairs), self.options)
+        else:
+            dialogs.alert("You must pick a lesson file!")
 
     def button_cancel(self, sender):
         Menu()
