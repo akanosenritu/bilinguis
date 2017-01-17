@@ -1,40 +1,53 @@
 import ui
 import bilinguis
 
-class App (object):
+
+class App(object):
     def __init__(self):
-        self.setup()
+        self.app()
 
-    def setup(self, pairs):
-        self.current = Pair(*pairs[0])
-        self.count = 0
+    def app(self):
+        ui.load_view("menu").present()
+
+
+
+class Practice (object):
+    def __init__(self, pairs, options):
+        self.setup(pairs)
+
+    def setup(self, pairs, options):
         self.pairs = pairs
-        self.processed = []
+        for option in options:
+            if option == "random":
+                self.pairs.randomize()
+            elif option == "reverse":
+                self.pairs.reverse()
+        self.current = pairs[0]
 
-    def next(self):
-        self.processed.append(self.current)
-        self.count += 1
-        self.current = Pair(*pairs[i])
 
+class PracticeUI:
+    @staticmethod
+    def button_next(sender):
+        pass
+        '''
+        v = sender.superview
+        if v['label2'] == '':
+            v['label2'] = app.current[1]
+        else:
+            app.next()
+            v['label1'] = app.current[0]
+            v['label2'] = ''
 
-def button_next(sender):
-    v = sender.superview
-    if v['label2'] == '':
-        v['label2'] = app.current[1]
-    else:
-        app.next()
-        v['label1'] = app.current[0]
-        v['label2'] = ''
+    @staticmethod
+    def button2_back(sender):
+        v = sender.superview
+        if v['label2'] == '':
+            v['label2'] = app.current[1]
+        else:
+            app.next()
+            v['label1'] = app.current[0]
+            v['label2'] = ''
+        '''
         
-def button2_back(sender):
-    v = sender.superview
-    if v['label2'] == '':
-        v['label2'] = app.current[1]
-    else:
-        app.next()
-        v['label1'] = app.current[0]
-        v['label2'] = ''
-        
-        
-app = App()
-ui.load_view('turkish').present('fullscreen')
+
+ui.load_view('practice').present('fullscreen')
