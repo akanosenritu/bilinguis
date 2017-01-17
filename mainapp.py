@@ -1,4 +1,5 @@
 import ui
+import bilinguis
 
 class App (object):
     def __init__(self):
@@ -18,7 +19,7 @@ class App (object):
 
 def button_next(sender):
     v = sender.superview
-    if v['label2'] = '':
+    if v['label2'] == '':
         v['label2'] = app.current[1]
     else:
         app.next()
@@ -27,7 +28,7 @@ def button_next(sender):
         
 def button2_back(sender):
     v = sender.superview
-    if v['label2'] = '':
+    if v['label2'] == '':
         v['label2'] = app.current[1]
     else:
         app.next()
