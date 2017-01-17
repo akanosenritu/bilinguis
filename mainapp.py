@@ -58,6 +58,8 @@ class Practice (object):
                     pass
 
         self.current = self.pairs.pairs[0]
+        self.view["label1"].text = self.current[0]
+        self.view["label2"].text = ""
         self.view.present()
 
     def next(self):
@@ -70,20 +72,20 @@ class Practice (object):
 
     def button_next(self, sender):
         v = sender.superview
-        if v['label2'] == '':
-            v['label2'] = self.current[1]
+        if v['label2'].text == '':
+            v['label2'].text = self.current[1]
         else:
             self.next()
-            v['label1'] = self.current[0]
-            v['label2'] = ''
+            v['label1'].text = self.current[0]
+            v['label2'].text = ''
 
     def button_back(self, sender):
         v = sender.superview
-        if v['label2'] != '':
-            v['label2'] = ''
+        if v['label2'].text != '':
+            v['label2'].text = ''
         else:
             self.back()
-            v['label1'] = self.current[0]
-            v['label2'] = self.current[1]
+            v['label1'].text = self.current[0]
+            v['label2'].text = self.current[1]
 
 menu = Menu()
