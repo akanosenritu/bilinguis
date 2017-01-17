@@ -12,8 +12,9 @@ class App(object):
 
 
 class Practice (object):
-    def __init__(self, pairs, options):
-        self.setup(pairs)
+    def __init__(self, pairs=[], options=[]):
+        pass
+        #self.setup(pairs)
 
     def setup(self, pairs, options):
         self.pairs = pairs
@@ -24,6 +25,11 @@ class Practice (object):
                 self.pairs.reverse()
         self.current = pairs[0]
 
+    def button_next(self):
+        pass
+
+    def button_back(self):
+        pass
 
 class PracticeUI:
     @staticmethod
@@ -49,5 +55,5 @@ class PracticeUI:
             v['label2'] = ''
         '''
         
-
-ui.load_view('practice').present('fullscreen')
+p = Practice()
+ui.load_view('practice').present()
