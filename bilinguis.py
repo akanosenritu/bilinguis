@@ -56,7 +56,9 @@ class App:
             exit(1)
         options = Dialogue.parse_choices("Choose options like \"0011\"(input=0, random=0, reverse=1, repeat=1)", 4)
         l.parse_content()
-        l.practice(*options)
+        p = Practice()
+        p.contents = l.pairs
+        p.practice(*options)
         print "You finished the lesson. Good job!"
         Dialogue.choice("Do you like to practice again? [y/n]", {"y": self.main, "n": exit})()
 
@@ -67,7 +69,6 @@ class FileBase:
         self.location = location
         self.content = ""
         self.pairs = []
-        self.pr = Practice()
         if not os.path.isfile(os.path.join(self.location, self.name)):
             print "File is missing. Exits..."
             exit(1)
@@ -87,10 +88,6 @@ class FileBase:
             if i >= length - 2:
                 break
             i += 2
-        self.pr.contents = self.pairs
-
-    def practice(self, input=0, random=0, reverse=0, repeat=0):
-        self.pr.practice(input, random, reverse, repeat)
 
 
 class LessonFile(FileBase):
@@ -107,7 +104,7 @@ class Pairs(object):
     def __init__(self, pairs):
         self.pairs = pairs
 
-    def randomize(self):
+    def random(self):
         result = []
         for i in range(len(self.pairs)):
             choice = random.choice(self.pairs)
@@ -127,7 +124,7 @@ class Practice:
     def practice(self, input, random, reverse, repeat):
         practice_contents = Pairs(copy.deepcopy(self.contents))
         if random != 0:
-            practice_contents.randomize()
+            practice_contents.random()
         if reverse != 0:
             practice_contents.reverse()
         if input != 0:
